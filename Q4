@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Q4</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form name="searching" action="hello2.html" method="GET" onsubmit="validateXSS();">
+            <label for="search">Search:</label>
+            <input type="text" id="search" name="search">
+            <input type="submit" value="Search">
+            </form>
+            <p id="test"></p>
+        </div>
+        <script>
+            function validateXSS(){
+                var textVal = document.getElementById("search").value;
+                if (htmlEncode(textVal)){
+                    alert(textVal);
+                }else{
+                    alert("textVal");
+                }
+                //alert(htmlEncode(textVal));
+                //alert(textVal);
+            }
+            function htmlEncode(str){
+                return String(str).replace(/[^\w. ]/gi, function(c){
+                    return '&#'+c.charCodeat(0)+';';
+                });
+            }
+            document.body.innerHTML = htmlEncode(untrustedValue);
+        </script>
+    </body>
+</html>
+
+
